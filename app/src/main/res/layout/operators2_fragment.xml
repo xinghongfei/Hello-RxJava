@@ -32,51 +32,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Observable Creation\n创建Observable的相关操作符"
+            android:text="Transforming and Filtering Observables\n变换和过滤Obervable发出数据的操作符"
             android:textColor="#000000"/>
 
-        <Button
-            android:id="@+id/btn_just"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="just"/>
 
 
         <Button
-            android:id="@+id/btn_from"
+            android:id="@+id/btn_flarmap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="from"/>
+            android:text="flatmap"/>
 
         <Button
-            android:id="@+id/btn_repeat"
+            android:id="@+id/btn_concatmap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="repeat"/>
+            android:text="concat"/>
 
         <Button
-            android:id="@+id/btn_repeatwhen"
+            android:id="@+id/btn_switchmap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="repeatWhen"/>
+            android:text="switchmap"/>
 
         <Button
-            android:id="@+id/btn_interval"
+            android:id="@+id/btn_buffer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="interval"/>
+            android:text="buffer"/>
 
-        <Button
-            android:id="@+id/btn_timer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="timer"/>
-
-        <Button
-            android:id="@+id/btn_range"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="range"/>
     </LinearLayout>
 </ScrollView>
 

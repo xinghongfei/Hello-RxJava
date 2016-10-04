@@ -45,8 +45,12 @@ public class RxJavaMainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.btn_operators1:
+                Intent operator1 = new Intent(this, Operators1Activity.class);
+                startActivity(operator1);
                 break;
             case R.id.btn_operators2:
+                Intent operator2 = new Intent(this, Operators2Activity.class);
+                startActivity(operator2);
                 break;
             case R.id.btn_operators3:
                 break;

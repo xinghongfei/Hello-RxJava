@@ -23,6 +23,14 @@
             android:name=".SchedulerActivity"
             android:label="Scheduler"
             android:launchMode="singleTop"/>
+        <activity
+            android:name=".Operators1Activity"
+            android:label="Operators"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".Operators2Activity"
+            android:label="Operators"
+            android:launchMode="singleTop"/>
     </application>
 
 </manifest>
