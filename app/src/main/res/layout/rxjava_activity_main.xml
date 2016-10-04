@@ -34,15 +34,16 @@
         android:layout_height="wrap_content"
         android:text="Operators 2"/>
 
-    <Button
-        android:id="@+id/btn_operators3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Operators 3"/>
 
     <Button
         android:id="@+id/btn_operators4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Operators 4"/>
+        android:text="Debounce EditText"/>
+    <Button
+        android:id="@+id/btn_operators3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Polling"/>
+
 </LinearLayout>

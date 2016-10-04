@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,8 +23,7 @@ public class RxJavaMainActivity extends AppCompatActivity {
     Button mBtnOperators3;
     @BindView(R.id.btn_operators4)
     Button mBtnOperators4;
-    @BindView(R.id.activity_main)
-    LinearLayout mActivityMain;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +51,14 @@ public class RxJavaMainActivity extends AppCompatActivity {
                 startActivity(operator2);
                 break;
             case R.id.btn_operators3:
+                Intent polling = new Intent(this, PollingActivity.class);
+                startActivity(polling);
                 break;
             case R.id.btn_operators4:
+                Intent debounce = new Intent(this, DebounceEditTextActivity.class);
+                startActivity(debounce);
                 break;
-            case R.id.activity_main:
-                break;
+
         }
     }
 }
