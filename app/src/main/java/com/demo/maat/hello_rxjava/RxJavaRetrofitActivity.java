@@ -27,9 +27,9 @@ import com.demo.maat.hello_rxjava.common.logger.LogWrapper;
 import com.demo.maat.hello_rxjava.common.logger.MessageOnlyLogFilter;
 
 
-public class SchedulerActivity extends SampleActivityBase {
+public class RxJavaRetrofitActivity extends SampleActivityBase {
 
-    public static final String TAG = "SchedulerActivity";
+    public static final String TAG = "RxJavaRetrofitActivity";
 
 
     @Override
@@ -39,7 +39,7 @@ public class SchedulerActivity extends SampleActivityBase {
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            SchedulerFragment fragment = new SchedulerFragment();
+            RxJavaRetrofitFragment fragment = new RxJavaRetrofitFragment();
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }

@@ -43,6 +43,8 @@ public class SchedulerFragment extends Fragment {
     Button mBtnJustfour;
     @BindView(R.id.btn_just_five)
     Button mBtnJustfive;
+    @BindView(R.id.btn_just_six)
+    Button mBtnJustsix;
     @BindView(R.id.btn_one_map)
     Button mBtnOneMap;
     @BindView(R.id.btn_two_map)
@@ -82,7 +84,8 @@ public class SchedulerFragment extends Fragment {
 
 
     @OnClick({R.id.btn_just, R.id.btn_just_one,  R.id.btn_just_two,
-            R.id.btn_just_three,R.id.btn_just_four, R.id.btn_just_five,   R.id.btn_no_map, R.id.btn_one_map, R.id.btn_two_map, R.id.btn_long_operation})
+            R.id.btn_just_three,R.id.btn_just_four, R.id.btn_just_five,
+            R.id.btn_just_six,R.id.btn_no_map, R.id.btn_one_map, R.id.btn_two_map, R.id.btn_long_operation})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_just:
@@ -103,6 +106,9 @@ public class SchedulerFragment extends Fragment {
             case R.id.btn_just_five:
                 doJustFive();
                 break;
+            case R.id.btn_just_six:
+                doJustSix();
+                break;
             case R.id.btn_no_map:
                 doBaseOperation();
                 break;
@@ -117,6 +123,7 @@ public class SchedulerFragment extends Fragment {
                 break;
         }
     }
+
 
 
     private void doJust() {
@@ -303,12 +310,59 @@ public class SchedulerFragment extends Fragment {
 
                 });
     }
+    private void doJustSix() {
+        Observable.just(1, 2, 3)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer integer) {
+                        printLog("map1 "+integer+"a");
+                        return integer+"a";
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String s) {
+                        printLog("map2 "+s+"b ");
+                        return s+"b";
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String s) {
+                        printLog("map3 "+s+"c ");
+                        return s+"c";
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        printLog("Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        printLog("onError");
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        printLog("Next " +s);
+
+                    }
+
+                });
+    }
 
 
     /**
-     * Subscriber的基本使用,没有线程切换,没有过滤等操作
-     * 你自己可以试一试
-     * Observable.just,Observable.from 等方式,看看什么效果
+     * Subscriber加Onsubscribe基本使用,没有线程切换,没有过滤等操作
+     *
      */
 
     private void doBaseOperation() {
@@ -411,8 +465,8 @@ public class SchedulerFragment extends Fragment {
                 printLog("onStart in OnSubscribe");
                 subscriber.onStart();
                 int N = data.length;
-                dosomethingBlockThread();
                 for (int i = 0; i < N; i++) {
+                    dosomethingBlockThread();
                     printLog("onNext" + data[i] + " in OnSubscribe");
                     subscriber.onNext(data[i]);
 
@@ -456,8 +510,8 @@ public class SchedulerFragment extends Fragment {
                 printLog("onStart in OnSubscribe");
                 subscriber.onStart();
                 int N = data.length;
-                dosomethingBlockThread();
                 for (int i = 0; i < N; i++) {
+                    dosomethingBlockThread();
                     printLog("onNext " + data[i] + " in OnSubscribe");
                     subscriber.onNext(data[i]);
 

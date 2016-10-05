@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -39,7 +40,7 @@ public class Operators2Fragment extends Fragment {
 
 
     private CompositeSubscription mCompositeSubscription;
-    ;
+    Subscription mSubscription;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,15 +63,6 @@ public class Operators2Fragment extends Fragment {
     }
 
 
-    private void printLog(String s) {
-        Log.i(TAG, s);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mCompositeSubscription.unsubscribe();
-    }
 
     @OnClick({R.id.btn_buffer, R.id.btn_flarmap, R.id.btn_concatmap, R.id.btn_switchmap})
     public void onClick(View view) {
@@ -152,7 +144,7 @@ public class Operators2Fragment extends Fragment {
 
     //一共发送10次信息,Observable每次缓存3秒一起发送
     private void doBufferOperation() {
-        final Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>() {
+        mSubscription=Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
                 for (int i = 0; i <10   ; i++) {
@@ -164,17 +156,20 @@ public class Operators2Fragment extends Fragment {
                     }
                 }
             }
-        }).subscribeOn(Schedulers.io());
-        observable.buffer(3, TimeUnit.SECONDS).subscribe(new Action1<List<String>>() {
-            @Override
-            public void call(List<String> list) {
-                printLog("接受到 "+list.size()+"次");
-                for (int i = 0; i < list.size(); i++){
-                    printLog(list.get(i));
-                }
+        }).subscribeOn(Schedulers.io())
+                 .buffer(3,TimeUnit.SECONDS)
+                 .subscribe(new Action1<List<String>>() {
+                     @Override
+                     public void call(List<String> list) {
+                         printLog("接收到 "+list.size()+"次");
+                         for (int i = 0; i < list.size(); i++){
+                             printLog(list.get(i));
+                         }
 
-            }
-        });
+                     }
+                 });
+        mCompositeSubscription.add(mSubscription);
+
 
     }
 
@@ -184,6 +179,17 @@ public class Operators2Fragment extends Fragment {
         public String[] getData(){
             return data;
         }
+    }
+
+
+    private void printLog(String s) {
+        Log.i(TAG, s);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mCompositeSubscription.unsubscribe();
     }
 }
 

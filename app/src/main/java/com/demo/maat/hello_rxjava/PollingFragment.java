@@ -33,7 +33,6 @@ public class PollingFragment extends Fragment {
     int N=0;
     private Subscription subscribe;
     private CompositeSubscription mCompositeSubscription;
-    ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +58,7 @@ public class PollingFragment extends Fragment {
     @OnClick(R.id.btn_polling)
     public void onClick() {
 
-
+        //此处有bug,subscribe无法释放,望高人pull requests
         subscribe=Observable.create(new Observable.OnSubscribe<String>() {
             @Override
             public void call(final Subscriber<? super String> observer) {

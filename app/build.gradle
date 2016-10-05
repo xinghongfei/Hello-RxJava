@@ -36,4 +36,11 @@ dependencies {
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxjava-math:1.0.0'
     compile 'com.jakewharton.rxbinding:rxbinding:0.2.0'
+    /*rotrofit*/
+    compile 'com.squareup.retrofit2:retrofit:+'
+    compile 'com.squareup.retrofit2:converter-gson:+'
+    compile 'com.squareup.retrofit2:adapter-rxjava:+'
+    compile 'com.google.code.gson:gson:+'
+
+    compile 'io.reactivex:rxandroid:1.2.1'
 }

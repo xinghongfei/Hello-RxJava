@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     Button mBtnRxjava;
     @BindView(R.id.btn_retrofit)
     Button mBtnRetrofit;
+    @BindView(R.id.btn_rxandroid)
+    Button mBtnRxAndroid;
 
 
     @Override
@@ -30,15 +31,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.btn_rxjava, R.id.btn_retrofit})
+    @OnClick({R.id.btn_rxjava, R.id.btn_retrofit,R.id.btn_rxandroid})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_rxjava:
-                Log.i("hehe", "heheh");
                 Intent intent=new Intent(MainActivity.this,RxJavaMainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_retrofit:
+                Intent retrofit=new Intent(MainActivity.this,RxJavaRetrofitActivity.class);
+                startActivity(retrofit);
+                break;
+            case R.id.btn_rxandroid:
+                Intent rxandroid=new Intent(MainActivity.this,RxAndroidActivity.class);
+                startActivity(rxandroid);
                 break;
         }
     }
