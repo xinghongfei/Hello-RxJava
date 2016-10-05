@@ -31,6 +31,18 @@ public class SchedulerFragment extends Fragment {
     String[] data = {"1", "2", "3"};
     @BindView(R.id.btn_no_map)
     Button mBtnNoMap;
+    @BindView(R.id.btn_just)
+    Button mBtnJust;
+    @BindView(R.id.btn_just_one)
+    Button mBtnJustone;
+    @BindView(R.id.btn_just_two)
+    Button mBtnJusttwo;
+    @BindView(R.id.btn_just_three)
+    Button mBtnJustthree;
+    @BindView(R.id.btn_just_four)
+    Button mBtnJustfour;
+    @BindView(R.id.btn_just_five)
+    Button mBtnJustfive;
     @BindView(R.id.btn_one_map)
     Button mBtnOneMap;
     @BindView(R.id.btn_two_map)
@@ -45,14 +57,15 @@ public class SchedulerFragment extends Fragment {
     private Subscription oneMapSubscription;
     private Subscription twoMapSubscription;
     private Subscription longOpeSubscription;
-    private CompositeSubscription mCompositeSubscription;;
+    private CompositeSubscription mCompositeSubscription;
+    ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.scheduler_fragment, container, false);
         ButterKnife.bind(this, view);
-        mCompositeSubscription=new CompositeSubscription();
+        mCompositeSubscription = new CompositeSubscription();
         return view;
     }
 
@@ -68,9 +81,28 @@ public class SchedulerFragment extends Fragment {
     }
 
 
-    @OnClick({R.id.btn_no_map, R.id.btn_one_map, R.id.btn_two_map, R.id.btn_long_operation})
+    @OnClick({R.id.btn_just, R.id.btn_just_one,  R.id.btn_just_two,
+            R.id.btn_just_three,R.id.btn_just_four, R.id.btn_just_five,   R.id.btn_no_map, R.id.btn_one_map, R.id.btn_two_map, R.id.btn_long_operation})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.btn_just:
+                doJust();
+                break;
+            case R.id.btn_just_one:
+                doJustOne();
+                break;
+            case R.id.btn_just_two:
+                doJustTwo();
+                break;
+            case R.id.btn_just_three:
+                doJustThree();
+                break;
+            case R.id.btn_just_four:
+                doJustFour();
+                break;
+            case R.id.btn_just_five:
+                doJustFive();
+                break;
             case R.id.btn_no_map:
                 doBaseOperation();
                 break;
@@ -84,6 +116,192 @@ public class SchedulerFragment extends Fragment {
                 doTwomapWithLongOperation();
                 break;
         }
+    }
+
+
+    private void doJust() {
+        Observable.just(1, 2, 3)
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        printLog("Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        printLog("onError");
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        printLog("Next " + integer + " ");
+                    }
+                });
+    }
+
+
+    private void doJustOne() {
+        Observable.just(1, 2, 3)
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        printLog("Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        printLog("onError");
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        printLog("Next " + integer + " ");
+                    }
+                });
+    }
+
+    private void doJustTwo() {
+        Observable.just(1, 2, 3)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        printLog("Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        printLog("onError");
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        printLog("Next " + integer + " ");
+                    }
+                });
+    }
+
+    private void doJustThree() {
+        Observable.just(1, 2, 3)
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer integer) {
+                        printLog("map "+integer+"a");
+                        return integer+"a";
+                    }
+                })
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        printLog("Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        printLog("onError");
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        printLog("Next " +s);
+
+                    }
+
+                });
+    }
+    private void doJustFour() {
+        Observable.just(1, 2, 3)
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer integer) {
+                        printLog("map1 "+integer+"a");
+                        return integer+"a";
+                    }
+                })
+//                试一试把上面的subscribeOn注释掉,使用这个,效果是不一样的
+//                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String s) {
+                        printLog("map2 "+s+"b ");
+                        return s+"b";
+                    }
+                })
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        printLog("Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        printLog("onError");
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        printLog("Next " +s);
+
+                    }
+
+                });
+    }
+    private void doJustFive() {
+        Observable.just(1, 2, 3)
+                .subscribeOn(Schedulers.io())
+                .map(new Func1<Integer, String>() {
+                    @Override
+                    public String call(Integer integer) {
+                        printLog("map1 "+integer+"a");
+                        return integer+"a";
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String s) {
+                        printLog("map2 "+s+"b ");
+                        return s+"b";
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .map(new Func1<String, String>() {
+                    @Override
+                    public String call(String s) {
+                        printLog("map3 "+s+"c ");
+                        return s+"c";
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        printLog("Completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        printLog("onError");
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        printLog("Next " +s);
+
+                    }
+
+                });
     }
 
 
@@ -156,7 +374,7 @@ public class SchedulerFragment extends Fragment {
             public String call(String s) {
                 String result = s + "a";
                 printLog(result);
-                return  result;
+                return result;
             }
         }).subscribe(new Subscriber<String>() {
             @Override
@@ -180,7 +398,6 @@ public class SchedulerFragment extends Fragment {
         });
         mCompositeSubscription.add(oneMapSubscription);
     }
-
 
 
     /**
@@ -253,8 +470,8 @@ public class SchedulerFragment extends Fragment {
                 .map(new Func1<String, String>() {
                     @Override
                     public String call(String s) {
-                        String result=s+"a";
-                        printLog("Map1 "+result);
+                        String result = s + "a";
+                        printLog("Map1 " + result);
                         return result;
                     }
                 })
@@ -262,8 +479,8 @@ public class SchedulerFragment extends Fragment {
                 .map(new Func1<String, String>() {
                     @Override
                     public String call(String s) {
-                        String result=s+"b";
-                        printLog("Map2 "+result);
+                        String result = s + "b";
+                        printLog("Map2 " + result);
                         return result;
                     }
                 })
@@ -290,6 +507,7 @@ public class SchedulerFragment extends Fragment {
                 });
         mCompositeSubscription.add(twoMapSubscription);
     }
+
     private void dosomethingBlockThread() {
         printLog("blocking....");
         try {

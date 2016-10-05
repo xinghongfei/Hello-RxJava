@@ -32,13 +32,45 @@
             android:layout_height="wrap_content"
             android:text="source data:1,2,3"/>
 
+
+        <Button
+            android:id="@+id/btn_just"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="just"/>
+
+
+        <Button
+            android:id="@+id/btn_just_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="just-1"/>
+        <Button
+            android:id="@+id/btn_just_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="just-2"/>
+        <Button
+            android:id="@+id/btn_just_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="just-3"/>
+        <Button
+            android:id="@+id/btn_just_four"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="just-4"/>
+        <Button
+            android:id="@+id/btn_just_five"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="just-5"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="RxJava basic operation"
             android:textColor="#000000"/>
-
         <Button
             android:id="@+id/btn_no_map"
             android:layout_width="match_parent"

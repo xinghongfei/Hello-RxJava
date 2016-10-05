@@ -35,5 +35,10 @@
         android:layout_height="wrap_content"
         android:text="Rxjava Retrofit"/>
 
+    <Button
+        android:id="@+id/btn_rxandroid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RxAndroid"/>
 
 </LinearLayout>
