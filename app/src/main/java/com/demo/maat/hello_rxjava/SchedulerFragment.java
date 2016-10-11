@@ -148,6 +148,10 @@ public class SchedulerFragment extends Fragment {
     }
 
 
+
+
+
+
     private void doJustOne() {
         Observable.just(1, 2, 3)
                 .subscribeOn(Schedulers.io())
@@ -169,6 +173,9 @@ public class SchedulerFragment extends Fragment {
                     }
                 });
     }
+
+
+
 
     private void doJustTwo() {
         Observable.just(1, 2, 3)
@@ -192,6 +199,10 @@ public class SchedulerFragment extends Fragment {
                     }
                 });
     }
+
+
+
+
 
     private void doJustThree() {
         Observable.just(1, 2, 3)
@@ -233,8 +244,6 @@ public class SchedulerFragment extends Fragment {
                         return integer+"a";
                     }
                 })
-//                试一试把上面的subscribeOn注释掉,使用这个,效果是不一样的
-//                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Func1<String, String>() {
                     @Override
@@ -263,6 +272,16 @@ public class SchedulerFragment extends Fragment {
 
                 });
     }
+
+
+
+
+
+
+
+
+
+
     private void doJustFive() {
         Observable.just(1, 2, 3)
                 .subscribeOn(Schedulers.io())
@@ -310,6 +329,11 @@ public class SchedulerFragment extends Fragment {
 
                 });
     }
+
+
+
+
+
     private void doJustSix() {
         Observable.just(1, 2, 3)
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -343,13 +367,11 @@ public class SchedulerFragment extends Fragment {
                     public void onCompleted() {
                         printLog("Completed");
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         printLog("onError");
 
                     }
-
                     @Override
                     public void onNext(String s) {
                         printLog("Next " +s);

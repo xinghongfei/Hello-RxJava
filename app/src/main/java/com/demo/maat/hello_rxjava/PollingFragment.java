@@ -71,7 +71,8 @@ public class PollingFragment extends Fragment {
                             }
                         }, 0, 1000, TimeUnit.MILLISECONDS);
             }
-        }).subscribe(new Action1<String>() {
+        })
+                .subscribe(new Action1<String>() {
             @Override
             public void call(String s) {
             printLog("polling"+s);
