@@ -2,7 +2,7 @@
 
 RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。
 
-What is Exjava,
+What is Rxjava,
 
 The most simply explain one in my mind is 
 
