@@ -2,6 +2,16 @@
 
 RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。
 
+What is Exjava,
+
+The most simply explain one in my mind is 
+
+1 "When something happen "   THEN
+
+2 " Here is what will happen next"
+
+**Why:** It makes you code 10x faster than whatever you are right now 
+
 
 
 
@@ -14,19 +24,41 @@ RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使�
 
 
 
-## 详解
+## 详解 (Details Explain)
 我们可以把Schedulers看作线程控制符，一共五种线程控制符，可以通过这些线程控制符切换不同的线程。以下是五种线程控制符的区别：
+
+To define the "time" of something happen, we need a "Scheduler",
+
+To define the "things happen" of something happen, we need a "Thread"
 
 1. `Schedulers.immediate()` 在当前线程运行，相当于不切换线程。这是默认的 Scheduler。
 
+    **Explain:** Read as "Do it Right now"
+
 2. `Schedulers.newThread()`总是启用新线程，并在新线程执行操作。
+
+    **Explain:** Read as "I dont care u are busy or not,Do this too "
+
 3. `Schedulers.io()` I/O 操作（读写文件、数据库、网络信息交互等）所使用的 Scheduler。行为模式和 newThread() 差不多，区别在于 io() 的内部实现是是用一个无数量上限的线程池，可以重用空闲的线程，因此多数情况下 io() 比 newThread() 更有效率。不要把计算工作放在 io() 中，可以避免创建不必要的线程。
+
+    **Explain:** Read as "Give me a minutes, I am writing the database "
+
 4. `Schedulers.computation()` 计算所使用的 Scheduler。这个计算指的是 CPU 密集型计算，即不会被 I/O 等操作限制性能的操作，例如图形的计算。这个 Scheduler 使用的固定的线程池，大小为 CPU 核数。不要把 I/O 操作放在 computation() 中，否则 I/O 操作的等待时间会浪费 CPU。
+
+    **Explain:** Read as "Give me a minutes, my brain is busy "
+
 5. `AndroidSchedulers.mainThread()` 切换到主线程，指定的操作将在Android 主线程运行。
+    
+    **Explain:** Read as "Dont do anything else, Just do this one first "
 
 ` 其实我们常用的就2种：Schedulers.io()和AndroidSchedulers.mainThread()`
 
+    **Note:** Schedulers.io() and AndroidSchedulers.mainThread() are the most common one
+
 > 以下几个例子都是使用Observable.just(1,2,3)创建被观察对象，观察者输出1，2，3. 
+
+> This example show how to use make a few threads that we can watch their actions    
+
 
 ####1. 基本使用
 <img src="screenshots/just.png" width="61%" />
