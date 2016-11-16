@@ -2,6 +2,16 @@
 
 RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。
 
+What is Exjava,
+
+The most simply explain one in my mind is 
+
+1 "When something happen "   THEN
+
+2 " Here is what will happen next"
+
+**Why:** It makes you code 10x faster than whatever you are right now 
+
 
 
 
@@ -14,8 +24,11 @@ RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使�
 
 
 
-## 详解
+## 详解 (Details Explain)
 我们可以把Schedulers看作线程控制符，一共五种线程控制符，可以通过这些线程控制符切换不同的线程。以下是五种线程控制符的区别：
+
+To define the "time" of something happen, we need a "Scheduler",
+To define the "things happen" of something happe, we need a "Thread"
 
 1. `Schedulers.immediate()` 在当前线程运行，相当于不切换线程。这是默认的 Scheduler。
 
