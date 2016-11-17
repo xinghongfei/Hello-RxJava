@@ -10,7 +10,8 @@ The most simply explain one in my mind is
 
 2 " Here is what will happen next"
 
-**Why:** It makes you code 10x faster than whatever you are right now 
+**Why:** Whenever we deal with http request or anything that cannt be done rigth the way. We need something to manage "When" will it be done
+
 
 
 
@@ -30,6 +31,8 @@ The most simply explain one in my mind is
 To define the "time" of something happen, we need a "Scheduler",
 
 To define the "things happen" of something happen, we need a "Thread"
+
+To define the "things happen right now" is Main Threads and other Thread treat as background Threads
 
 1. `Schedulers.immediate()` 在当前线程运行，相当于不切换线程。这是默认的 Scheduler。
 
@@ -60,36 +63,39 @@ To define the "things happen" of something happen, we need a "Thread"
 > This example show how to use make a few threads that we can watch their actions    
 
 
-####1. 基本使用
+#### 1. 基本使用(Simply way to monitor the Threads)
 <img src="screenshots/just.png" width="61%" />
  <img src="screenshots/just.gif" width="34%" />
  <img src="screenshots/justp.png" width="96%" />
-####2. 使用 subscribeOn(Schedulers.io())设置被观察者的线程
+
+#### 2. 使用 subscribeOn(Schedulers.io())设置被观察者的线程 -Put it down to other Threads but Not Main Thread
+
 <img src="screenshots/just1.png" width="61%" />
  <img src="screenshots/just1.gif" width="34%" />
  <img src="screenshots/just1p.png" width="96%" /> 
+
   > 以下几个例子中看不出被观察者发生在什么线程，使用Observeble.create()创建被观察者可以看出发生在什么线程，可参看源码中的其它Demo。
   
-####3. 使用 subscribeOn(Schedulers.io()) 和 observeOn() 设置被观察者和观察者的线程
+#### 3. 使用 subscribeOn(Schedulers.io()) 和 observeOn() 设置被观察者和观察者的线程
 
 <img src="screenshots/just2.png" width="61%" />
  <img src="screenshots/just2.gif" width="34%" />
  <img src="screenshots/just2p.png" width="96%" />  
 
-####4. 使用Schedulers.io()指定被观察者产生事件的线程,然后使用Map对数据转换，这里只是在每个数据后面加‘a’。
+#### 4. 使用Schedulers.io()指定被观察者产生事件的线程,然后使用Map对数据转换，这里只是在每个数据后面加‘a’。
 
 <img src="screenshots/just3.png" width="61%" />
  <img src="screenshots/just3.gif" width="34%" />
  <img src="screenshots/just3p.png" width="96%" />  
 
  
-####5. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，输出结果。
+#### 5. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，输出结果。
 
 <img src="screenshots/just4.png" width="61%" />
  <img src="screenshots/just4.gif" width="34%" />
  <img src="screenshots/just4p.png" width="96%" />  
 
-####6. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，再用Schedulers.io()切换线程，用Map对数据加‘c’，输出结果。
+#### 6. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，再用Schedulers.io()切换线程，用Map对数据加‘c’，输出结果。
 
 <img src="screenshots/just5.png" width="61%" />
  <img src="screenshots/just5.gif" width="34%" />
