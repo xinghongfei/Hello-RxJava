@@ -98,7 +98,14 @@ public class LogFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                //afterTextChanged 在 text发生改变后马上被调用，此时可能text还未被绘制，导致无法滑动到最底部
+                //所以不能直接调用，而应该使用post
+                mScrollView.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        mScrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                    }
+                });
             }
         });
         return result;
