@@ -1,11 +1,8 @@
 # Learning RxJava(RxJava详解)  
 
-RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。
 
-
-
-
-
+RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。就是用最简单移动的方式把Rxjava讲明白。
+**为什么做这个项目：**学习Rxjava相信所有人都看过扔物线的《给Android开发者Rxjava的详解》，这片文章后半部分讲对线程的操作，相信很多人不是很容易看懂。这个项目
 ## Screenshots
  <img src="screenshots/just.gif" width="22%" />
  <img src="screenshots/just6.gif" width="22%" />
