@@ -1,14 +1,12 @@
 # Learning RxJava(RxJava详解)  
-**为什么做这个项目：**学习Rxjava相信所有人都看过扔物线的《给Android开发者Rxjava的详解》，这片文章后半部分讲对线程的操作，相信很多人不是很容易看懂。这个项目通过最简单的方式，把Rxjava最核心的内容讲清楚，所以，在学习这个项目前先看扔物线大哥的文章
+**为什么做这个项目：** 学习Rxjava,基本所有人都会看扔物线的《给Android开发者Rxjava的详解》，可以说是国内最理想的Rxjava教程了。这片文章后半部分讲对线程的操作，相信很多人都不太懂。这个项目通过最简单的方式，对Rxjava线程操作的进行讲解，让大家彻底明白Rxjava的核心内容。所以，在学习这个项目前先看扔物线大哥的文章。
 
-RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。就是用最简单移动的方式把Rxjava讲明白。
+RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。就是用最简单移动的方式把Rxjava讲明白.
 
 ## Screenshots
- <img src="screenshots/just.gif" width="22%" />
- <img src="screenshots/just6.gif" width="22%" />
-<img src="screenshots/polling.gif" width="22%" />
-<img src="screenshots/rxjavaretrofit.gif" width="22%" />
 
+
+ <img src="screenshots/just.gif" width="22%" /> | <img src="screenshots/just6.gif" width="22%" />  ｜ <img src="screenshots/polling.gif" width="22%" /> ｜ <img src="screenshots/rxjavaretrofit.gif" width="22%" />
 
 
 ## 详解 (Details Explain)
@@ -34,51 +32,50 @@ RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使�
 
 ` 其实我们常用的就2种：Schedulers.io()和AndroidSchedulers.mainThread()`
 
-    **Note:** Schedulers.io() and AndroidSchedulers.mainThread() are the most common one
-
 > 以下几个例子都是使用Observable.just(1,2,3)创建被观察对象，观察者输出1，2，3. 
 
 > This example show how to use make a few threads that we can watch their actions    
 
 
-####1. 基本使用
+#### 1. 基本使用
 <img src="screenshots/just.png" width="61%" />
  <img src="screenshots/just.gif" width="34%" />
  <img src="screenshots/justp.png" width="96%" />
-####2. 使用 subscribeOn(Schedulers.io())设置被观察者的线程
+ 
+#### 2. 使用 subscribeOn(Schedulers.io())设置被观察者的线程
 <img src="screenshots/just1.png" width="61%" />
  <img src="screenshots/just1.gif" width="34%" />
  <img src="screenshots/just1p.png" width="96%" /> 
   > 以下几个例子中看不出被观察者发生在什么线程，使用Observeble.create()创建被观察者可以看出发生在什么线程，可参看源码中的其它Demo。
   
-####3. 使用 subscribeOn(Schedulers.io()) 和 observeOn() 设置被观察者和观察者的线程
+#### 3. 使用 subscribeOn(Schedulers.io()) 和 observeOn() 设置被观察者和观察者的线程
 
 <img src="screenshots/just2.png" width="61%" />
  <img src="screenshots/just2.gif" width="34%" />
  <img src="screenshots/just2p.png" width="96%" />  
 
-####4. 使用Schedulers.io()指定被观察者产生事件的线程,然后使用Map对数据转换，这里只是在每个数据后面加‘a’。
+#### 4. 使用Schedulers.io()指定被观察者产生事件的线程,然后使用Map对数据转换，这里只是在每个数据后面加‘a’。
 
 <img src="screenshots/just3.png" width="61%" />
  <img src="screenshots/just3.gif" width="34%" />
  <img src="screenshots/just3p.png" width="96%" />  
 
  
-####5. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，输出结果。
+#### 5. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，输出结果。
 
 <img src="screenshots/just4.png" width="61%" />
  <img src="screenshots/just4.gif" width="34%" />
  <img src="screenshots/just4p.png" width="96%" />  
 
-####6. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，再用Schedulers.io()切换线程，用Map对数据加‘c’，输出结果。
+#### 6. 使用Schedulers.io()指定被观察者产生事件的线程,使用Map对数据转换，在每个数据后面加‘a’，使用AndroidSchedulers.mainThread()切换到主线程，然后使用Map变换，每个数据后加‘b’，再用Schedulers.io()切换线程，用Map对数据加‘c’，输出结果。
 
 <img src="screenshots/just5.png" width="61%" />
  <img src="screenshots/just5.gif" width="34%" />
  <img src="screenshots/just5p.png" width="96%" />  
  
-####7.这个例子不同的是使用了两次subscribeOn()来指定被观察者的线程，最终最上面的subscribeOn()起作用，下面的subscribeOn()不起作用。然后使用Map对数据转换，这里只是在每个数据后面加‘a’，使用Schedulers.io()切换线程，然后使用Map变换，每个数据后加‘b’，再用AndroidSchedulers.mainThread()切换主线程，用Map对数据加‘c’，最后再切换到非主线程，输出结果。
+#### 7.这个例子不同的是使用了两次subscribeOn()来指定被观察者的线程，最终最上面的subscribeOn()起作用，下面的subscribeOn()不起作用。然后使用Map对数据转换，这里只是在每个数据后面加‘a’，使用Schedulers.io()切换线程，然后使用Map变换，每个数据后加‘b’，再用AndroidSchedulers.mainThread()切换主线程，用Map对数据加‘c’，最后再切换到非主线程，输出结果。
 
-<img src="screenshots/just6.png" width="61%" />
+<img src="screenshots/just6.png" width="58%" />
  <img src="screenshots/just6.gif" width="34%" />
  <img src="screenshots/just6p.png" width="96%" />
  
@@ -86,7 +83,7 @@ RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使�
 
 `更多的例子请看源码`
  
-##About me
+## About me
 
 An android developer in Beijing.Welcome to offer me an [Interview invitation](mailto:maat.xing@gmail.com). If you have any new idea about this project, feel free to [contact me](mailto:maat.xing@gmail.com). :smiley:
 
