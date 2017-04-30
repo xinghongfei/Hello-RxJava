@@ -3,11 +3,6 @@
 
 RxJava的精妙之处就是异步操作极其方便，也就是Schedulers的使用，本项目可以让大家彻底掌握Schedulers的使用，还有常用的操作符、RxAndroid...的使用详解。就是用最简单移动的方式把Rxjava讲明白.
 
-## Screenshots
-
-
- <img src="screenshots/just.gif" width="22%" /> <img src="screenshots/just6.gif" width="22%" />  <img src="screenshots/polling.gif" width="22%" /> <img src="screenshots/rxjavaretrofit.gif" width="22%" />
-
 
 ## 详解 (Details Explain)
 我们可以把Schedulers看作线程控制符，一共五种线程控制符，可以通过这些线程控制符切换不同的线程。以下是五种线程控制符的区别：
